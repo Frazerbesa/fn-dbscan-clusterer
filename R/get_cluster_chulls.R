@@ -1,4 +1,3 @@
-library(sp)
 
 function(points_with_cluster_id, subject){
 

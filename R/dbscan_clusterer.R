@@ -1,14 +1,11 @@
-library(sf)
-library(dbscan)
-library(spatstat)
-library(cluster)
 
-dbscan_clusterer_parallel = dget('function/dbscan_clusterer_parallel.R')
-get_parcels = dget("function/get_parcels.R")
-combine_geojson_for_parcels <- dget("function/combine_geojson_for_parcels.R")
-get_chulls_for_parceller <- dget("function/get_chulls_for_parceller.R")
-split_clusters = dget("function/split_clusters_parallel.R")
-get_cluster_chulls = dget("function/get_cluster_chulls.R")
+
+dbscan_clusterer_parallel = dget('R/dbscan_clusterer_parallel.R')
+get_parcels = dget("R/get_parcels.R")
+combine_geojson_for_parcels <- dget("R/combine_geojson_for_parcels.R")
+get_chulls_for_parceller <- dget("R/get_chulls_for_parceller.R")
+split_clusters = dget("R/split_clusters_parallel.R")
+get_cluster_chulls = dget("R/get_cluster_chulls.R")
 
 function(params){
 

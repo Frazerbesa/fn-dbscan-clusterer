@@ -1,5 +1,3 @@
-
-
 # Get chulls
 function(points_with_cluster_id){
   

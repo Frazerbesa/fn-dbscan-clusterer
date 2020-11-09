@@ -15,7 +15,7 @@ function(list_of_geojson) {
       
       x_sf <- x_sf[,-c(2:ncol(x_sf))] 
       names(x_sf)[1] <- "COL1"
-      st_cast(x_sf, "LINESTRING")
+      st_cast(x_sf, "MULTILINESTRING")
     })
   
   merged <- do.call(rbind, lines_list)

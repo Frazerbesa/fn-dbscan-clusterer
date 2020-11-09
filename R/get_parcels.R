@@ -1,8 +1,3 @@
-library(dbscan)
-library(sp)
-library(sf)
-library(rgeos)
-library(raster)
 
 # Get chulls
 get_chulls_for_parceller <- dget("function/get_chulls_for_parceller.R")

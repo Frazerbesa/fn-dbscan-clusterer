@@ -1,9 +1,3 @@
-library(dbscan)
-library(sp)
-library(sf)
-library(rgeos)
-
-
 # Get chulls
 get_chulls_for_parceller <- function(points_with_cluster_id){
   
