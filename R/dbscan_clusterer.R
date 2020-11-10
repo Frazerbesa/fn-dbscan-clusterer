@@ -7,7 +7,8 @@ get_chulls_for_parceller <- dget("R/get_chulls_for_parceller.R")
 split_clusters = dget("R/split_clusters_parallel.R")
 get_cluster_chulls = dget("R/get_cluster_chulls.R")
 
-function(params){
+function(params,
+         result_path){
 
   if(substr(params[['subject']], 1, 4) == "http"){
     subject <- st_read(params[['subject']], quiet = T) # Always with the :QUIET:
@@ -80,16 +81,22 @@ function(params){
           points_with_cluster_id$cluster_id
 
         if(return_type == "subject"){
-          return(list(subject = geojson_list(subject)))
+          st_write(st_as_sf(subject), file.path(result_path,"subject.geojson"),
+                        quiet = TRUE)
+          return()
         }
 
-        if(return_type == "chull"){
+        if(return_type == "hull"){
 
           # Generate chulls
           chull_polys <- get_cluster_chulls(points_with_cluster_id)
-          return(list(hull = geojson_list(chull_polys)))
+          st_write(st_as_sf(chull_polys), file.path(result_path, "hulls.geojson"),
+                        quiet = TRUE)
+          return()
 
-        }else{
+        }
+        
+        if(return_type == "both"){
 
             # Generate chulls
             chull_polys <- get_cluster_chulls(points_with_cluster_id, subject)
@@ -99,8 +106,11 @@ function(params){
             chull_polys_geojson_list$features <- lapply(chull_polys_geojson_list$features,
                                                         function(x) {x$id<-NULL; return(x)})
 
-            return(list(subject = geojson_list(subject),
-                        hull = chull_polys_geojson_list))
+            st_write(st_as_sf(subject), file.path(result_path,"subject.geojson"),
+                          quiet = TRUE)
+            st_write(st_as_sf(chull_polys), file.path(result_path, "hulls.geojson"),
+                          quiet = TRUE)
+            return()
           }
         }else{
 
@@ -147,13 +157,19 @@ function(params){
       }
       
       if(return_type == "hull"){
-        return(list(hull = geojson_list(chull_polys)))
+        st_write(st_as_sf(chull_polys),
+                 file.path(result_path, "hulls.geojson"),
+                 quiet = TRUE)
       }
       if(return_type == "both"){
-        return(list(subject = geojson_list(subject),
-                    hull = geojson_list(chull_polys)))
-      }else{
-      return(list(subject = geojson_list(subject)))
+        st_write(st_as_sf(subject), file.path(result_path,"subject.geojson"),
+                      quiet = TRUE)
+        st_write(st_as_sf(chull_polys), file.path(result_path, "hulls.geojson"),
+                      quiet = TRUE)
+      }
+      if(return_type == "subject"){
+        st_write(st_as_sf(subject), file.path(result_path,"subject.geojson"),
+                      quiet = TRUE) 
       }
     }
 }
