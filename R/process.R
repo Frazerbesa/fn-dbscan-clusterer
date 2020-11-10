@@ -5,16 +5,22 @@ suppressMessages({
   library(cluster)
   library(sp)
   library(rgeos)
+  library(jsonlite)
+  library(taRifx)
+  library(geojsonio)
 })
 
+# Get worker function
+dbscan_clusterer <- dget("R/dbscan_clusterer.R")
+source("R/default_params.R")
 
 process <- function(request_path,
                     result_path
 ) {
   
-  setwd(request_path)
+  #setwd(request_path)
   
-  user_params <- fromJSON(readLines('request.json'))
+  user_params <- fromJSON(readLines(file.path(request_path, 'request.json')))
   
   # Set all defaults
   params_with_defaults <- merge.list(user_params, defaults)
@@ -29,7 +35,7 @@ process <- function(request_path,
   # }
   
   # Run function
-  result <- prev_pred(params_with_defaults,
+  result <- dbscan_clusterer(params_with_defaults,
                       result_path = result_path)
   
   # Return anything

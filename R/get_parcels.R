@@ -1,6 +1,6 @@
 
 # Get chulls
-get_chulls_for_parceller <- dget("function/get_chulls_for_parceller.R")
+get_chulls_for_parceller <- dget("R/get_chulls_for_parceller.R")
 
 
 function(structure_points, parcel_lines){

@@ -1,7 +1,7 @@
 library(RANN)
 library(parallel)
 
-split_clusters_parallel = dget('function/split_clusters_parallel.R')
+split_clusters_parallel = dget('R/split_clusters_parallel.R')
 
 function(cluster_points, max_num, max_dist) {
   # Kmeans doesn'l like having to find large numbers of groups
