@@ -1,0 +1,12 @@
+{
+  "max_num": 50,
+  "max_dist_m": 250,
+  "subject": [
+    "https://storage.googleapis.com/lnl-dev-data/build_crop.geojson"
+  ],
+  "parcel_by": [ 
+    "https://storage.googleapis.com/lnl-dev-data/osm_roads_swz_crop.geojson",
+    "https://storage.googleapis.com/lnl-dev-data/adm2_swz_crop.geojson",
+    "https://storage.googleapis.com/lnl-dev-data/rivers_swz_crop.geojson"
+  ]
+}
