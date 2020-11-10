@@ -1,6 +1,6 @@
     
-split_clusters = dget('function/dbscan_cluster_splitting.R')
-get_cluster_chulls = dget('function/get_cluster_chulls.R')
+split_clusters = dget('R/dbscan_cluster_splitting.R')
+get_cluster_chulls = dget('R/get_cluster_chulls.R')
 
 function(subject, max_dist, max_num){
     # Run dbscan to find neighbourhoods
