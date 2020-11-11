@@ -1,0 +1,10 @@
+{
+  "max_num": 50,
+  "max_dist_m": 100000,
+  "subject": [
+    "https://storage.googleapis.com/lnl-dev-data/sample%20tourism%20data/tourism_point.gpkg"
+  ],
+  "parcel_by": [ 
+    "https://storage.googleapis.com/lnl-dev-data/sample%20tourism%20data/WDPA%20extract.gpkg"
+  ]
+}
