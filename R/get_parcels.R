@@ -1,9 +1,9 @@
 
 # Get chulls
-get_chulls_for_parceller <- dget("R/get_chulls_for_parceller.R")
+#get_chulls_for_parceller <- dget("R/get_chulls_for_parceller.R")
+get_dissolved_buffer <- dget("R/get_dissolved_buffer.R")
 
-
-function(structure_points, parcel_lines){
+function(structure_points, parcel_lines, max_dist){
   
   if(nrow(structure_points)<=2){
     #structure_points$parcel <- paste0("top_cluster", structure_points$cluster_id)
@@ -16,8 +16,9 @@ function(structure_points, parcel_lines){
     return(structure_points)
   }
 
-  # Create buffers around structures
-  structure_buffers <- get_chulls_for_parceller(structure_points)
+  # Create buffers around points
+  #structure_buffers <- get_chulls_for_parceller(structure_points)
+  structure_buffers <- get_dissolved_buffer(structure_points, max_dist)
   
   # If it intersects, split
   lpi <- gIntersection(structure_buffers, parcel_lines_crop)  # intersect your line with the polygon
