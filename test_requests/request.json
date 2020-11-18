@@ -1,10 +1,9 @@
 {
-  "max_num": 50,
-  "max_dist_m": 100000,
+  "max_dist_m": 50000,
+  "max_num": 10000000,
   "subject": [
-    "https://storage.googleapis.com/lnl-dev-data/sample%20tourism%20data/tourism_point.gpkg"
+    "~/Downloads/tourism_sites.geojson"
   ],
-  "parcel_by": [ 
-    "https://storage.googleapis.com/lnl-dev-data/sample%20tourism%20data/WDPA%20extract.gpkg"
-  ]
+  "parcel_by": 
+  "https://www.dropbox.com/s/d75bg2s994izp82/africa_countries.geojson?dl=1"
 }
