@@ -6,6 +6,7 @@ combine_geojson_for_parcels <- dget("R/combine_geojson_for_parcels.R")
 get_chulls_for_parceller <- dget("R/get_chulls_for_parceller.R")
 split_clusters = dget("R/split_clusters_parallel.R")
 get_cluster_chulls = dget("R/get_cluster_chulls.R")
+st_buffer_without_overlap = dget("R/generate_polys_for_viz.R")
 
 function(params,
          result_path){
