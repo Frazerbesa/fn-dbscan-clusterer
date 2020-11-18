@@ -2,6 +2,9 @@ library(dplyr)
 
 function(centroids, dist) {
   
+  # Convert meters to dd
+  dist <- (dist/111000) / 2
+  
   # Voronoi tesselation
   voronoi <- 
     centroids %>% 

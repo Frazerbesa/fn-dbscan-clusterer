@@ -37,9 +37,8 @@ function(params,
       point_coords <- st_coordinates(subject)
       set.seed(1981)
       dbscan_cluster <- dbscan(point_coords,
-                               eps = max_dist, # over 2 as radius not diameter
+                               eps = max_dist, 
                                minPts = 1)
-      
 
       # Split clusters by roads/rivers/other
       point_coords_sp <- SpatialPointsDataFrame(SpatialPoints(point_coords),
@@ -48,9 +47,9 @@ function(params,
       # First merge parcel lines if necessary
       if(!is.null(parcel_lines_list)){
       parcel_lines <- combine_geojson_for_parcels(parcel_lines_list)
-      point_coords_sp <- get_parcels(point_coords_sp, parcel_lines)
+      point_coords_sp <- get_parcels(point_coords_sp, parcel_lines, max_dist)
       }else{
-        point_coords_sp$cluster <- 1
+        #point_coords_sp$cluster <- 1
       }
 
       # split groups that are too large
@@ -100,16 +99,17 @@ function(params,
         if(return_type == "both"){
 
             # Generate chulls
-            chull_polys <- get_cluster_chulls(points_with_cluster_id, subject)
-            chull_polys_geojson_list <- geojson_list(chull_polys)
+            chull_polys <- st_buffer_without_overlap(st_as_sf(subject),
+                                                     max_dist_m)
+            #chull_polys_geojson_list <- geojson_list(chull_polys)
 
             # Remove 'ID' field
-            chull_polys_geojson_list$features <- lapply(chull_polys_geojson_list$features,
-                                                        function(x) {x$id<-NULL; return(x)})
+            # chull_polys_geojson_list$features <- lapply(chull_polys_geojson_list$features,
+            #                                             function(x) {x$id<-NULL; return(x)})
 
             st_write(st_as_sf(subject), file.path(result_path,"subject.geojson"),
                           quiet = TRUE)
-            st_write(st_as_sf(chull_polys), file.path(result_path, "hulls.geojson"),
+            st_write(chull_polys, file.path(result_path, "clusters.geojson"),
                           quiet = TRUE)
             return()
           }
