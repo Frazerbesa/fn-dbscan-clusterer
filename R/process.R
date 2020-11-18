@@ -8,6 +8,7 @@ suppressMessages({
   library(jsonlite)
   library(taRifx)
   library(geojsonio)
+  library(raster)
 })
 
 # Get worker function
